@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport จำเป็นมากสำหรับ Responsive: บอกให้มือถือใช้ความกว้างจริงของจอ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SchoolName | Login</title>
+
+  <!-- Bootstrap 5 CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- ฟอนต์: Montserrat (อังกฤษ) + Kanit (ไทย) -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- CSS ของเราเอง ต้องโหลด "หลัง" Bootstrap เพื่อให้ทับค่าได้ -->
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- =====================================================
+       [เกณฑ์ 3] NAVBAR แบบ Responsive
+       - navbar-expand-lg : จอ ≥ 992px โชว์เมนูเต็ม, จอเล็กกว่ายุบเป็นปุ่ม ☰
+       - navbar-toggler + collapse : ปุ่มกดเปิด/ปิดเมนูบนมือถือ (ใช้ JavaScript ของ Bootstrap)
+       - dropdown : เมนูย่อย (ใช้ JavaScript ของ Bootstrap)
+       ===================================================== -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-navy sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">
+        <span class="text-danger">School</span>Name
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+              aria-controls="mainNav" aria-expanded="false" aria-label="เปิดเมนู">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link active" href="#home">หน้าแรก</a></li>
+          <li class="nav-item"><a class="nav-link" href="#news">ข่าวสาร</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">บริการ</a></li>
+
+          <!-- Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              สำหรับนักเรียน
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#services">เช็คการเข้าเรียน</a></li>
+              <li><a class="dropdown-item" href="#services">ดูผลการเรียน</a></li>
+              <li><a class="dropdown-item" href="#services">ตารางเรียน</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#faq">คำถามที่พบบ่อย</a></li>
+            </ul>
+          </li>
+
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item ms-lg-2">
+            <!-- ปุ่มเปิด Modal สมัครสมาชิก -->
+            <button class="btn btn-warning rounded-pill px-4 fw-semibold" data-bs-toggle="modal" data-bs-target="#signupModal">
+              Sign Up
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- =====================================================
+       [เกณฑ์ 1 + 2] ส่วนหลัก: การ์ด Login 2 ฝั่ง
+       - container > row > col : โครงสร้าง Grid
+       - col-12 col-md-5 col-lg-5 : มือถือเต็มแถว / แท็บเล็ตขึ้นไปแบ่ง 5:7
+       - Utility: d-flex, justify-content-*, align-items-*, p-*, m-*, bg-*, text-*, rounded-*, shadow-*
+       ===================================================== -->
+  <main id="home" class="hero py-4 py-md-5">
+    <!-- จุดวงกลมตกแต่ง -->
+    <span class="dot dot-red"></span>
+    <span class="dot dot-yellow"></span>
+    <span class="dot dot-green d-none d-md-block"></span>
+    <span class="dot dot-navy d-none d-md-block"></span>
+
+    <div class="container position-relative">
+      <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+
+          <div class="login-card bg-white rounded-4 shadow-lg overflow-hidden">
+            <div class="row g-0">
+
+              <!-- ฝั่งซ้าย: กระดานดำ -->
+              <div class="col-12 col-md-5 board text-white p-4 p-lg-5 d-flex flex-column justify-content-between">
+                <div class="board-doodle" aria-hidden="true">Back to<br>School</div>
+                <h2 class="board-title text-warning fw-bold mt-md-5 pt-md-5 mb-3">
+                  <span class="underline-green">Dear Student</span>
+                </h2>
+                <p class="text-success-light fw-medium small mb-0 position-relative">
+                  เข้าสู่ระบบเพื่อดูข้อมูลของคุณ<br>เช่น การเข้าเรียน ผลการเรียน และอื่นๆ...
+                </p>
+              </div>
+
+              <!-- ฝั่งขวา: ฟอร์ม Login -->
+              <div class="col-12 col-md-7 position-relative">
+                <span class="corner corner-top d-none d-md-block"></span>
+                <span class="corner corner-bottom d-none d-md-block"></span>
+                <span class="ring d-none d-md-block"></span>
+
+                <div class="px-4 px-sm-5 py-5">
+                  <p class="text-end fw-bold small mb-2"><span class="text-danger">School</span><span class="text-navy">Name</span></p>
+
+                  <h1 class="text-center text-navy fw-bold display-title mb-3">Login to Account</h1>
+                  <div class="title-line mx-auto mb-4"></div>
+
+                  <!-- ปุ่ม Social: d-flex + justify-content-center + gap -->
+                  <div class="d-flex justify-content-center gap-3 mb-3">
+                    <button type="button" class="btn social-btn rounded-circle shadow-sm" aria-label="Google">G</button>
+                    <button type="button" class="btn social-btn rounded-circle shadow-sm" aria-label="Facebook">f</button>
+                    <button type="button" class="btn social-btn rounded-circle shadow-sm" aria-label="โทรศัพท์">&#9742;</button>
+                  </div>
+                  <p class="text-center text-secondary small mb-4">หรือใช้บัญชีอีเมลของคุณ</p>
+
+                  <!-- =====================================================
+                       [เกณฑ์ 4] FORM CONTROL
+                       - form-floating : ป้ายชื่อลอยขึ้นด้านบนเหมือนในรูปต้นแบบ
+                       - form-control, form-label, form-check, input-group
+                       - needs-validation + novalidate : ให้ Bootstrap แสดงข้อความแจ้งเตือน
+                       ===================================================== -->
+                  <form id="loginForm" class="mx-auto login-form needs-validation" novalidate>
+                    <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com" required>
+                      <label for="loginEmail">Email</label>
+                      <div class="invalid-feedback">กรุณากรอกอีเมลให้ถูกต้อง</div>
+                    </div>
+
+                    <div class="input-group mb-3 has-validation">
+                      <div class="form-floating">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" minlength="6" required>
+                        <label for="loginPassword">Password</label>
+                      </div>
+                      <button class="btn btn-outline-navy" type="button" id="togglePw">แสดง</button>
+                      <div class="invalid-feedback">รหัสผ่านอย่างน้อย 6 ตัวอักษร</div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember">
+                        <label class="form-check-label fw-semibold" for="remember">Remember me</label>
+                      </div>
+                      <!-- Collapse: กดแล้วกล่อง "ลืมรหัสผ่าน" จะเลื่อนออกมา -->
+                      <a class="fw-semibold text-navy text-decoration-none" data-bs-toggle="collapse" href="#forgotBox" role="button" aria-expanded="false" aria-controls="forgotBox">
+                        Forgot Password ?
+                      </a>
+                    </div>
+
+                    <div class="collapse mb-4" id="forgotBox">
+                      <div class="card card-body bg-light border-0 small">
+                        กรอกอีเมลด้านบน แล้วระบบจะส่งลิงก์ตั้งรหัสผ่านใหม่ไปให้
+                        <button type="button" class="btn btn-sm btn-navy mt-2 align-self-start" id="sendReset">ส่งลิงก์รีเซ็ต</button>
+                      </div>
+                    </div>
+
+                    <div class="d-grid col-8 col-sm-6 mx-auto">
+                      <button type="submit" class="btn btn-navy btn-lg rounded-pill fw-semibold">Login</button>
+                    </div>
+
+                    <p class="text-center small fw-semibold mt-3 mb-0">ยังไม่มีบัญชี ?</p>
+                    <p class="text-center mb-0">
+                      <a href="#" class="link-danger fw-bold" data-bs-toggle="modal" data-bs-target="#signupModal">Sign Up</a>
+                    </p>
+                  </form>
+
+                  <div class="d-flex justify-content-center align-items-center gap-3 mt-4 small text-secondary">
+                    <a href="#" class="text-secondary text-decoration-none">Privacy Policy</a>
+                    <span class="sep-dot"></span>
+                    <a href="#" class="text-secondary text-decoration-none">Terms &amp; Conditions</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- =====================================================
+       [เกณฑ์ 3] CAROUSEL ภาพสไลด์โชว์
+       - carousel slide + data-bs-ride="carousel" : เลื่อนเองอัตโนมัติ
+       - data-bs-interval : ตั้งเวลาแต่ละสไลด์ (มิลลิวินาที)
+       - carousel-indicators / carousel-control : จุดและลูกศรเลื่อน
+       - carousel-caption d-none d-md-block : ซ่อนคำบรรยายบนมือถือ
+       หมายเหตุ: ใช้พื้นหลังสีแทนรูป ถ้ามีรูปจริงให้เปลี่ยนเป็น <img src="..." class="d-block w-100">
+       ===================================================== -->
+  <section id="news" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-navy fw-bold text-center mb-4">ข่าวประชาสัมพันธ์</h2>
+
+      <div id="newsCarousel" class="carousel slide rounded-4 overflow-hidden shadow" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="สไลด์ 1"></button>
+          <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="1" aria-label="สไลด์ 2"></button>
+          <button type="button" data-bs-target="#newsCarousel" data-bs-slide-to="2" aria-label="สไลด์ 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <div class="carousel-item active" data-bs-interval="4000">
+            <div class="slide slide-1 d-flex align-items-center justify-content-center">
+              <img src="1.jfif" class="d-block w-100 slide-img" alt="เปิดภาคเรียนที่ 2/2569">
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+              <h5 class="fw-bold">เปิดภาคเรียนที่ 2/2569</h5>
+              <p>นักเรียนตรวจสอบตารางเรียนใหม่ได้ในระบบ</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="4000">
+            <div class="slide slide-2 d-flex align-items-center justify-content-center">
+              <span class="slide-icon">🏆</span>
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+              <h5 class="fw-bold">ยินดีกับทีมหุ่นยนต์ของโรงเรียน</h5>
+              <p>คว้ารางวัลจากการแข่งขันระดับภาค</p>
+            </div>
+          </div>
+          <div class="carousel-item" data-bs-interval="4000">
+            <div class="slide slide-3 d-flex align-items-center justify-content-center">
+              <span class="slide-icon">🔬</span>
+            </div>
+            <div class="carousel-caption d-none d-md-block">
+              <h5 class="fw-bold">สัปดาห์วิทยาศาสตร์</h5>
+              <p>ส่งโครงงานได้ถึงสิ้นเดือนนี้</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#newsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">ก่อนหน้า</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#newsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">ถัดไป</span>
+        </button>
+      </div>
+      <p class="text-center text-secondary small mt-2">ข่าวตัวอย่าง</p>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       [เกณฑ์ 1 + 2] การ์ดบริการ — สาธิต Breakpoints
+       col-12      : มือถือ   1 การ์ด/แถว
+       col-sm-6    : ≥576px   2 การ์ด/แถว
+       col-lg-3    : ≥992px   4 การ์ด/แถว
+       g-4 = ระยะห่างระหว่างคอลัมน์ (gutter)
+       ===================================================== -->
+  <section id="services" class="py-5">
+    <div class="container">
+      <h2 class="text-navy fw-bold text-center mb-2">บริการในระบบ</h2>
+      <p class="text-center text-secondary mb-4">ทุกอย่างที่นักเรียนต้องใช้ อยู่ในที่เดียว</p>
+
+      <div class="row g-4">
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-3 service-card">
+            <div class="icon-circle bg-warning mx-auto mb-3">✅</div>
+            <h5 class="fw-semibold text-navy">การเข้าเรียน</h5>
+            <p class="text-secondary small mb-0">ดูสถิติมา สาย ขาด ลา รายวิชา</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-3 service-card">
+            <div class="icon-circle bg-success mx-auto mb-3">📊</div>
+            <h5 class="fw-semibold text-navy">ผลการเรียน</h5>
+            <p class="text-secondary small mb-0">ตรวจเกรดและคะแนนเก็บแต่ละภาค</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-3 service-card">
+            <div class="icon-circle bg-danger mx-auto mb-3">🗓️</div>
+            <h5 class="fw-semibold text-navy">ตารางเรียน</h5>
+            <p class="text-secondary small mb-0">ตารางเรียนและห้องเรียนประจำวัน</p>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3">
+          <div class="card h-100 border-0 shadow-sm rounded-4 text-center p-3 service-card">
+            <div class="icon-circle bg-info mx-auto mb-3">📢</div>
+            <h5 class="fw-semibold text-navy">ประกาศ</h5>
+            <p class="text-secondary small mb-0">ข่าวและกิจกรรมจากโรงเรียน</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       [เกณฑ์ 3] ACCORDION (ใช้ Collapse ของ Bootstrap)
+       ===================================================== -->
+  <section id="faq" class="py-5 bg-light">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <h2 class="text-navy fw-bold text-center mb-4">คำถามที่พบบ่อย</h2>
+
+          <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                  ลืมรหัสผ่านต้องทำอย่างไร?
+                </button>
+              </h3>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">กด "Forgot Password ?" ที่หน้า Login แล้วกรอกอีเมลที่ลงทะเบียนไว้</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                  สมัครสมาชิกต้องใช้ข้อมูลอะไรบ้าง?
+                </button>
+              </h3>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">ชื่อ-นามสกุล อีเมล ระดับชั้น และห้องเรียน</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                  ใช้งานบนมือถือได้ไหม?
+                </button>
+              </h3>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">ได้ หน้าเว็บนี้ปรับขนาดตามหน้าจอทั้งคอมพิวเตอร์ แท็บเล็ต และมือถือ</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="bg-navy text-white-50 py-4">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small">
+      <span><span class="text-danger fw-bold">School</span><span class="text-white fw-bold">Name</span> © 2026</span>
+      <span>โรงเรียนตัวอย่าง · ระบบสารสนเทศนักเรียน</span>
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       [เกณฑ์ 3 + 4] MODAL สมัครสมาชิก + ฟอร์มเต็มรูปแบบ
+       - modal fade, modal-dialog-centered, modal-dialog-scrollable
+       - form-label, form-control, form-select, form-check (radio), row g-3 จัดฟอร์มเป็น Grid
+       ===================================================== -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+      <div class="modal-content rounded-4 border-0">
+        <div class="modal-header bg-navy text-white">
+          <h5 class="modal-title fw-bold" id="signupTitle">สมัครสมาชิก</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="ปิด"></button>
+        </div>
+
+        <div class="modal-body p-4">
+          <form id="signupForm" class="row g-3 needs-validation" novalidate>
+            <div class="col-12 col-md-6">
+              <label for="firstName" class="form-label">ชื่อ</label>
+              <input type="text" class="form-control" id="firstName" placeholder="สมชาย" required>
+              <div class="invalid-feedback">กรุณากรอกชื่อ</div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="lastName" class="form-label">นามสกุล</label>
+              <input type="text" class="form-control" id="lastName" placeholder="ใจดี" required>
+              <div class="invalid-feedback">กรุณากรอกนามสกุล</div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="studentId" class="form-label">รหัสนักเรียน</label>
+              <input type="text" class="form-control" id="studentId" placeholder="เช่น 12345" pattern="[0-9]{5}" required>
+              <div class="form-text">ตัวเลข 5 หลัก</div>
+              <div class="invalid-feedback">รหัสนักเรียนต้องเป็นตัวเลข 5 หลัก</div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="signupEmail" class="form-label">อีเมล</label>
+              <input type="email" class="form-control" id="signupEmail" placeholder="name@school.ac.th" required>
+              <div class="invalid-feedback">กรุณากรอกอีเมลให้ถูกต้อง</div>
+            </div>
+
+            <!-- form-select -->
+            <div class="col-6 col-md-4">
+              <label for="grade" class="form-label">ระดับชั้น</label>
+              <select class="form-select" id="grade" required>
+                <option value="" selected disabled>เลือก...</option>
+                <option>ม.1</option><option>ม.2</option><option>ม.3</option>
+                <option>ม.4</option><option>ม.5</option><option>ม.6</option>
+              </select>
+              <div class="invalid-feedback">เลือกระดับชั้น</div>
+            </div>
+            <div class="col-6 col-md-4">
+              <label for="room" class="form-label">ห้อง</label>
+              <select class="form-select" id="room" required>
+                <option value="" selected disabled>เลือก...</option>
+                <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+              </select>
+              <div class="invalid-feedback">เลือกห้อง</div>
+            </div>
+            <div class="col-12 col-md-4">
+              <label class="form-label d-block">สถานะ</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="roleStudent" checked>
+                <label class="form-check-label" for="roleStudent">นักเรียน</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="role" id="roleTeacher">
+                <label class="form-check-label" for="roleTeacher">ครู</label>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-6">
+              <label for="signupPw" class="form-label">รหัสผ่าน</label>
+              <input type="password" class="form-control" id="signupPw" minlength="6" required>
+              <div class="invalid-feedback">อย่างน้อย 6 ตัวอักษร</div>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="signupPw2" class="form-label">ยืนยันรหัสผ่าน</label>
+              <input type="password" class="form-control" id="signupPw2" required>
+              <div class="invalid-feedback">รหัสผ่านไม่ตรงกัน</div>
+            </div>
+
+            <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="agree" required>
+                <label class="form-check-label" for="agree">ยอมรับ Terms &amp; Conditions</label>
+                <div class="invalid-feedback">ต้องยอมรับก่อนสมัคร</div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">ยกเลิก</button>
+          <!-- form="signupForm" ทำให้ปุ่มที่อยู่นอก <form> ส่งฟอร์มได้ -->
+          <button type="submit" form="signupForm" class="btn btn-navy rounded-pill px-4">สมัครสมาชิก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Toast แจ้งผลลัพธ์ (คอมโพเนนต์ JavaScript ของ Bootstrap) -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast align-items-center text-bg-dark border-0" role="status" aria-live="polite">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMsg">...</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="ปิด"></button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Bootstrap 5 JS (bundle = รวม Popper แล้ว จำเป็นสำหรับ Dropdown) ใส่ไว้ท้าย body -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JavaScript ของเราเอง -->
+  <script src="script.js"></script>
+</body>
+</html>
